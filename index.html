@@ -193,6 +193,17 @@
       opacity: 0.35;
     }
 
+    .progress-dots {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      margin-bottom: 18px;
+    }
+
     .progress-dot {
       width: 10px;
       height: 10px;
@@ -312,28 +323,6 @@
       color: transparent;
     }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .photo-slot {
-      height: 110px;
-      border-radius: 1.25rem;
-      background:
-        linear-gradient(135deg, rgba(251, 207, 232, 0.55), rgba(221, 214, 254, 0.65));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9d174d;
-      font-weight: 700;
-      border: 1px dashed rgba(255, 255, 255, 0.8);
-      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.6);
-      text-align: center;
-      padding: 8px;
-    }
-
     .tiny-glow {
       position: absolute;
       width: 10px;
@@ -395,14 +384,6 @@
       <div class="tiny-glow" style="top: 180px; left: 35px; animation-delay: 0.8s;"></div>
       <div class="tiny-glow" style="bottom: 170px; right: 90px; animation-delay: 1.4s;"></div>
 
-      <!-- 顶部进度 -->
-      <div class="relative z-10 flex justify-center items-center gap-3 py-3" id="progressDots">
-        <div class="progress-dot active"></div>
-        <div class="progress-dot"></div>
-        <div class="progress-dot"></div>
-        <div class="progress-dot"></div>
-      </div>
-
       <!-- 第1页 -->
       <div class="page active" id="page0">
         <div class="pt-2 px-2 flex flex-col items-center">
@@ -423,12 +404,23 @@
               祝老姐生日快乐！！！
             </span>
           </div>
+        </div>
 
-          <div class="mt-6 w-full flex justify-end">
+        <div>
+          <div class="progress-dots" id="progressDots">
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+
+          <div class="mt-2 w-full flex justify-end px-2 pb-3">
             <button class="btn-main w-36" onclick="nextPage()">下一页</button>
           </div>
         </div>
       </div>
+
+      <!-- 第2页 -->
       <div class="page" id="page1">
         <div class="pt-2 px-2 flex flex-col h-full">
           <div class="icon-badge mt-2">
@@ -458,8 +450,17 @@
               </p>
             </div>
           </div>
+        </div>
 
-          <div class="mt-5 flex justify-between gap-3">
+        <div>
+          <div class="progress-dots" id="progressDots">
+            <div class="progress-dot"></div>
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+
+          <div class="mt-2 flex justify-between gap-3 px-2 pb-3">
             <button class="btn-sub flex-1" onclick="prevPage()">上一页</button>
             <button class="btn-main flex-1" onclick="nextPage()">下一页</button>
           </div>
@@ -499,9 +500,18 @@
           </div>
         </div>
 
-        <div class="flex justify-between px-2 pb-3 gap-3">
-          <button class="btn-sub flex-1" onclick="prevPage()">上一页</button>
-          <button class="btn-main flex-1" onclick="nextPage()">下一页</button>
+        <div>
+          <div class="progress-dots" id="progressDots">
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+          </div>
+
+          <div class="mt-2 flex justify-between px-2 pb-3 gap-3">
+            <button class="btn-sub flex-1" onclick="prevPage()">上一页</button>
+            <button class="btn-main flex-1" onclick="nextPage()">下一页</button>
+          </div>
         </div>
       </div>
 
@@ -529,14 +539,23 @@
           <div class="soft-card mt-8 text-center">
             <div class="text-gray-700 leading-7">
               生日快乐呀，姐姐。<br>
-              愿你的世界一直明亮温柔，灿烂又浪漫。
+              请收下老弟最真挚的祝福嘿嘿~
             </div>
           </div>
         </div>
 
-        <div class="flex justify-between px-2 pb-3 gap-3">
-          <button class="btn-sub flex-1" onclick="prevPage()">上一页</button>
-          <button class="btn-main flex-1" onclick="replayBlessing()">再看一次</button>
+        <div>
+          <div class="progress-dots" id="progressDots">
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot active"></div>
+          </div>
+
+          <div class="mt-2 flex justify-between px-2 pb-3 gap-3">
+            <button class="btn-sub flex-1" onclick="prevPage()">上一页</button>
+            <button class="btn-main flex-1" onclick="replayBlessing()">再看一次</button>
+          </div>
         </div>
       </div>
 
@@ -578,16 +597,11 @@
     lucide.createIcons();
 
     const pages = document.querySelectorAll(".page");
-    const dots = document.querySelectorAll(".progress-dot");
     let currentPage = 0;
 
     function updatePage() {
       pages.forEach((page, index) => {
         page.classList.toggle("active", index === currentPage);
-      });
-
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentPage);
       });
 
       lucide.createIcons();
